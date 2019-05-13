@@ -2,6 +2,43 @@
 
 
 
+## Typy generyczne
+
+
+### Interfejs generyczny
+
+- Utworzenie interfejsu
+
+IServices.cs
+
+~~~ csharp
+public interface IEntitiesService<TEntity>
+    {
+        IEnumerable<TEntity> Get();
+        TEntity Get(int id);
+        void Add(TEntity entity);
+        void Update(TEntity entity);
+        void Remove(int id);
+    }
+~~~
+
+- Zastosowanie
+~~~ csharp
+
+public interface ICustomersService : IEntitiesService<Customer>
+ {
+     IEnumerable<Customer> Get(Gender gender);
+ }
+ 
+ ~~~
+
+### Utworzenie klasy generycznej
+
+
+
+
+ 
+
 ## Metody rozszerzające
 
 ### Utworzenie własnej metody rozszerzającej
