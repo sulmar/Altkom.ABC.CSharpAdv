@@ -10,6 +10,7 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
     {
         static void Main(string[] args)
         {
+            CollectionTests.Test();
         }
     }
 }
