@@ -4,7 +4,7 @@
 
 ## Metody rozszerzające
 
-### FluentDateTime
+### Biblioteka FluentDateTime
 
 ~~~ powershell
 PM> Install-Package FluentDateTime
