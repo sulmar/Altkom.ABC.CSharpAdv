@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollectionTests.cs" />
+    <Compile Include="ExtensionMethodTests.cs" />
     <Compile Include="FakeServices\FakeEntitiesService.cs" />
     <Compile Include="FakeServices\FakeOrdersService.cs" />
     <Compile Include="FakeServices\OrderFaker.cs" />
