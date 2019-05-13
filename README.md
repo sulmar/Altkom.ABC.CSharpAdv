@@ -4,6 +4,25 @@
 
 ## Metody rozszerzające
 
+### Utworzenie własnej metody rozszerzającej
+
+~~~ csharp
+ public static class DateTimeExtensions
+    {
+        public static bool IsWeekend(this DateTime dateTime)
+        {
+            return dateTime.DayOfWeek == DayOfWeek.Saturday
+                || dateTime.DayOfWeek == DayOfWeek.Sunday;
+        }
+
+        public static DateTime AddWorkDays(this DateTime dateTime, byte days)
+        {
+            return dateTime.AddDays(days);
+        }
+    }
+~~~
+
+
 ### Biblioteka FluentDateTime
 
 ~~~ powershell
