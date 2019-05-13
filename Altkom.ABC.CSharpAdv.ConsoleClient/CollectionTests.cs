@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,38 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
 
             DictionaryTest();
 
+            YieldTest();
 
+            CustomCollectionTest();
 
+        }
 
+        private static void CustomCollectionTest()
+        {
+            IEnumerable<Person> people = new List<Person>
+            {
+                new Person("Marcin"),
+                new Person("Piotr"),
+                new Person("Kamil"),
+            };
+
+            Room room = new Room(people.ToList());
+
+            foreach (Person person in room)
+            {
+                Console.WriteLine(person);
+            }
+        }
+
+        private static void YieldTest()
+        {
+            WeekDays weekDays = new WeekDays();
+            var days = weekDays.Get();
+
+            foreach (var day in days)
+            {
+                Console.WriteLine(day);
+            }
         }
 
         public static void ListTest()
@@ -156,6 +186,82 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
         public override string ToString()
         {
             return FirstName;
+        }
+    }
+
+
+    public class WeekDays
+    {
+        //private IEnumerable<string> days = new List<string>
+        //{
+        //    "pn",
+        //    "wt",
+        //    "sr",
+        //    "cz",
+        //    "pt",
+        //    "sb",
+        //    "nd"
+        //};
+
+        private IEnumerable<string> days = new List<string>
+        {
+           "pn",
+            "wt",
+            "sr",
+            "cz",
+            "pt",
+            "sb",
+            "nd"
+        };
+
+        public IEnumerable<string> Get()
+        {
+            yield return "pn";
+
+            DoWork();
+            yield return "wt"; DoWork();
+            yield return "sr"; DoWork();
+            yield return "cz"; DoWork();
+            yield return "pt";
+            yield return "sb";
+            yield return "nd";
+
+            // return days;
+        }
+
+        private void DoWork()
+        {
+            Console.WriteLine("Do work");
+        }
+    }
+
+    public class Room : IEnumerable<Person>
+    {
+        private IList<Person> people = new List<Person>();
+
+        public Room(IList<Person> people)
+        {
+            this.people = people;
+        }
+
+        public IEnumerator<Person> GetEnumerator()
+        {
+            int index = people.Count - 1;
+
+            while (index>=0)
+            {
+                yield return people[index--];                
+            }
+
+            //foreach (var person in people)
+            //{
+            //    yield return person;
+            //}
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
     }
 

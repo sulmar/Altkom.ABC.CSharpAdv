@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace Altkom.ABC.CSharpAdv.ConsoleClient
 {
-    class Program
+    public abstract class Base
     {
-        static void Main(string[] args)
-        {
-            CollectionTests.Test();
-
-            GenericTests.Test();
-        }
+        public int Id { get; set; }
     }
 }

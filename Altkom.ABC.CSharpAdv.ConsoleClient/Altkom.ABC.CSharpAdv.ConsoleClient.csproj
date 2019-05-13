@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bogus, Version=27.0.1.0, Culture=neutral, PublicKeyToken=fa1bb3f3f218129a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bogus.27.0.1\lib\net40\Bogus.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,11 +47,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollectionTests.cs" />
+    <Compile Include="FakeServices\FakeEntitiesService.cs" />
+    <Compile Include="FakeServices\FakeOrdersService.cs" />
+    <Compile Include="FakeServices\OrderFaker.cs" />
+    <Compile Include="Models\Base.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="DbServices\DbCustomersService.cs" />
+    <Compile Include="FakeServices\CustomerFaker.cs" />
+    <Compile Include="FakeServices\FakeCustomersService.cs" />
+    <Compile Include="Models\Gender.cs" />
+    <Compile Include="GenericTests.cs" />
+    <Compile Include="IServices\ICustomersService.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Customers.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
