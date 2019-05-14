@@ -1,21 +1,73 @@
-﻿using System;
+﻿using Altkom.ABC.CSharpAdv.ConsoleClient.FakeServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Altkom.ABC.CSharpAdv.ConsoleClient
 {
     class DelegateTests
     {
 
+        public class Vehicle
+        {
+            public string Model { get; set; }
+            public string Color { get; set; }
+        }
+
         public static void Test()
         {
             DelegegateTest();
 
             PrinterTest();
+
+            AnonymousTypeTest();
+            
         }
+
+
+        private static void AnonymousTypeTest()
+        {
+            CustomerFaker customerFaker = new CustomerFaker();
+
+            Customer customer = customerFaker.Generate();
+
+            CustomerInfo customerInfo = new CustomerInfo
+            {
+                FirstName = customer.FirstName,
+                LastName = customer.LastName
+            };
+
+            var customerInfo2 = new
+            {
+                Imie = customer.FirstName,
+                Plec = customer.Gender
+            };
+
+            var x = 10d;
+
+            var location = new { lat = 52.06, lng = 19.8 };
+
+            // location.lat = 51.4;  // błąd kompilacji - wartość tylko do odczytu
+
+            Console.WriteLine($"({location.lat}, { location.lng})");
+
+            IEnumerable<Customer> customers = customerFaker.Generate(10);
+
+            var emails = customers.Select(c => new { c.Email, c.Gender });
+
+            foreach (var email in emails)
+            {
+                Console.WriteLine($"{email.Email} {email.Gender}");
+            }
+
+        }
+
+        //class anonymous_543753584w38957p839578d963
+        //{
+        //    public double lat { get; set; }
+        //    public double lng { get; set; }
+        //}
 
         private static void PrinterTest()
         {
@@ -44,9 +96,6 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
             printer.CalculateCost += copies => copies * 5.99m;
 
             printer.HasAuthorization += () => Thread.CurrentPrincipal.Identity.IsAuthenticated;
-
-
-
 
             Delegate[] delegates = printer.Log.GetInvocationList();
 

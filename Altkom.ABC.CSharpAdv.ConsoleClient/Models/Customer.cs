@@ -2,6 +2,13 @@
 
 namespace Altkom.ABC.CSharpAdv.ConsoleClient
 {
+
+    public class CustomerInfo
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+    }
+
     public class Customer : Base
     {
         public Customer()
