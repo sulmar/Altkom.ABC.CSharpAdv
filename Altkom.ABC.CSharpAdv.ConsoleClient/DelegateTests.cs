@@ -39,9 +39,11 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
             // Wyrażenie lambda
             // printer.Log += (string content) => Console.WriteLine($"Sent tweet {content}");
 
-            printer.Log += content => Console.WriteLine($"Sent tweet {content}");
+            printer.Log += content => Console.WriteLine($"Sent tweet {content}");           
 
             printer.CalculateCost += copies => copies * 5.99m;
+
+            printer.HasAuthorization += () => Thread.CurrentPrincipal.Identity.IsAuthenticated;
 
 
 
@@ -116,14 +118,28 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
 
     class Printer
     {
-        public delegate void LogDelegate(string message);
-        public LogDelegate Log { get; set; }
+        //public delegate void LogDelegate(string message);
+        //public LogDelegate Log { get; set; }
 
-        public delegate decimal CalculateCostDelegate(byte copies);
-        public CalculateCostDelegate CalculateCost { get; set; }
+        public Action<string> Log { get; set; }
+
+        //public delegate decimal CalculateCostDelegate(byte copies);
+        //public CalculateCostDelegate CalculateCost { get; set; }
+
+        public Func<byte, decimal> CalculateCost { get; set; }
+
+        public Func<bool> HasAuthorization { get; set; }
 
         public bool Print(string content, byte copies = 1)
         {
+            // TODO: czy uzytkownik posiada autoryzacje do wydruku?
+            if (!HasAuthorization?.Invoke() ?? false )
+            {
+                Log?.Invoke($"Access denied.");
+
+                return false;
+            }
+
             for (int copy = 0; copy < copies; copy++)
             {
                 // Console.WriteLine($"Printing {content} copy #{copy}");
