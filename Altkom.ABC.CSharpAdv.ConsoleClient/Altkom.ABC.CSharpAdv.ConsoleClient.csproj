@@ -48,13 +48,16 @@
   <ItemGroup>
     <Compile Include="CollectionTests.cs" />
     <Compile Include="ExtensionMethodTests.cs" />
+    <Compile Include="FakeServices\DbOrdersService.cs" />
     <Compile Include="FakeServices\FakeEntitiesService.cs" />
     <Compile Include="FakeServices\FakeOrdersService.cs" />
-    <Compile Include="FakeServices\OrderFaker.cs" />
+    <Compile Include="FakeServices\Fakers\OrderFaker.cs" />
+    <Compile Include="IServices\IEntitiesService.cs" />
+    <Compile Include="IServices\IOrdersService.cs" />
     <Compile Include="Models\Base.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="DbServices\DbCustomersService.cs" />
-    <Compile Include="FakeServices\CustomerFaker.cs" />
+    <Compile Include="FakeServices\Fakers\CustomerFaker.cs" />
     <Compile Include="FakeServices\FakeCustomersService.cs" />
     <Compile Include="Models\Gender.cs" />
     <Compile Include="GenericTests.cs" />

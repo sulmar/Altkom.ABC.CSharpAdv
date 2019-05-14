@@ -18,14 +18,6 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
             Get(id).IsDeleted = true;
         }
     }
-
-    public class DbOrdersService : FakeOrdersService
-    {
-        public override void Remove(int id)
-        {
-            throw new NotImplementedException();
-        }
-    }
     
 
 

@@ -10,42 +10,27 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
     {
         protected readonly ICollection<TEntity> entities;
 
-        public FakeEntitiesService()
-        {
-            Faker<TEntity> entityFaker = new Faker<TEntity>();
+        private Faker<TEntity> entityFaker;
 
+        public FakeEntitiesService()
+            : this(new Faker<TEntity>())
+        {
+        }
+
+        public FakeEntitiesService(Faker<TEntity> entityFaker)
+        {
             entities = entityFaker.Generate(100);
         }
 
-        public virtual void Add(TEntity entity)
-        {
-            entities.Add(entity);
-        }
+        public virtual void Add(TEntity entity) => entities.Add(entity);
 
-        public virtual IEnumerable<TEntity> Get()
-        {
-            return entities;
-        }
+        public virtual IEnumerable<TEntity> Get() => entities;
 
-        public virtual TEntity Get(int id)
-        {
-            return entities.SingleOrDefault(p => p.Id == id);
-        }
+        public virtual TEntity Get(int id) => entities.SingleOrDefault(p => p.Id == id);
 
-        public virtual void Remove(int id)
-        {
-            entities.Remove(Get(id));
-        }
+        public virtual void Remove(int id) => entities.Remove(Get(id));
 
-        //public void Remove(int id)
-        //{
-        //    entities.Remove(Get(id));
-        //}
-
-        public virtual void Update(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
+        public virtual void Update(TEntity entity) => throw new NotImplementedException();
     }
     
 
