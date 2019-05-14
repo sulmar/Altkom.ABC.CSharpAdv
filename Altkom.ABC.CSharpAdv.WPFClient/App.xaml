@@ -1,0 +1,14 @@
+﻿<Application x:Class="Altkom.ABC.CSharpAdv.WPFClient.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Altkom.ABC.CSharpAdv.WPFClient"
+             xmlns:vm="clr-namespace:Altkom.ABC.CSharpAdv.WPFClient.ViewModels"
+             StartupUri="Views/ShellView.xaml">
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <vm:ViewModelLocator x:Key="Locator" />
+        </ResourceDictionary>
+         
+    </Application.Resources>
+</Application>

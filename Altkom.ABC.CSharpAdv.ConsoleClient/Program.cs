@@ -17,6 +17,8 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
             ExtensionMethodTests.Test();
 
             DelegateTests.Test();
+
+            LinqTest.Test();
         }
     }
 }

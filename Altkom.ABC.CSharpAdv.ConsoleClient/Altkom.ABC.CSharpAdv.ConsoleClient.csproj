@@ -59,6 +59,7 @@
     <Compile Include="FakeServices\Fakers\OrderFaker.cs" />
     <Compile Include="IServices\IEntitiesService.cs" />
     <Compile Include="IServices\IOrdersService.cs" />
+    <Compile Include="LinqTest.cs" />
     <Compile Include="Models\Base.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="DbServices\DbCustomersService.cs" />
