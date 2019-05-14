@@ -31,6 +31,7 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
         public virtual void Remove(int id) => entities.Remove(Get(id));
 
         public virtual void Update(TEntity entity) => throw new NotImplementedException();
+
     }
     
 
