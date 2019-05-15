@@ -11,10 +11,44 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
     {
         public static void Test()
         {
+            SetsTest();
+
             QueryableTest();
 
             GroupByTest();
 
+        }
+
+        private static void SetsTest()
+        {
+            IEnumerable<int> numbers = Enumerable.Range(1, 10);
+
+            IEnumerable<int> myNumbers = new List<int> { 5, 7, 21, 30 };
+
+            var common = numbers.Intersect(myNumbers);
+            Display(common);
+
+            var except = numbers.Except(myNumbers);
+            Display(except);
+
+            var union = numbers.Union(myNumbers);
+            Display(union);
+
+            var unionAll = numbers.Concat(myNumbers);
+            Display(unionAll);
+
+            var hasAllOver10 = unionAll.All(n => n > 10);
+
+            var hasAnyOver10 = unionAll.Any(n => n > 10);
+            var hasAnyOver10b = unionAll.Where(n => n > 10).Any();
+        }
+
+        private static void Display(IEnumerable<int> common)
+        {
+            foreach (var number in common)
+            {
+                Console.WriteLine(number);
+            }
         }
 
         private static void GroupByTest()
