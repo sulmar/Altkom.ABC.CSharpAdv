@@ -26,7 +26,7 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
 
         public virtual IEnumerable<TEntity> Get() => entities;
 
-        public virtual TEntity Get(int id) => entities.SingleOrDefault(p => p.Id == id);
+        public virtual TEntity Get(int id) => entities.FirstOrDefault(p => p.Id == id);
 
         public virtual void Remove(int id) => entities.Remove(Get(id));
 

@@ -69,8 +69,10 @@
     <Compile Include="GenericTests.cs" />
     <Compile Include="IServices\ICustomersService.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Setting.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReflectionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -22,8 +22,27 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
             ordersService.Remove(0);
         }
 
+
+     
         public class CustomersServiceFactory
         {
+
+            public static ICustomersService GetCustomersService(string classname)
+            {
+                string objectToInstance = $"Altkom.ABC.CSharpAdv.ConsoleClient.{classname}, Altkom.ABC.CSharpAdv.ConsoleClient";
+
+                Type objectType = Type.GetType(objectToInstance);
+
+                if (objectType == null)
+                {
+                    throw new NotSupportedException(classname);
+                }
+
+                var instance = Activator.CreateInstance(objectType) as ICustomersService;
+
+                return instance;
+            }
+
             public static ICustomersService GetCustomersService()
             {
                 return new FakeCustomersService();
@@ -37,7 +56,7 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
 
         public static void InterfaceTest()
         {
-            ICustomersService customersService = CustomersServiceFactory.GetCustomersService();
+            ICustomersService customersService = CustomersServiceFactory.GetCustomersService("DbCustomersService");
 
             // ICustomersService customersService = new DbCustomersService();
 

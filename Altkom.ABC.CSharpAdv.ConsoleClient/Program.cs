@@ -12,13 +12,15 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
         {
             CollectionTests.Test();
 
-           // GenericTests.Test();
+            GenericTests.Test();
 
             ExtensionMethodTests.Test();
 
             DelegateTests.Test();
 
             LinqTest.Test();
+
+            ReflectionTests.Test();
         }
     }
 }
