@@ -20,6 +20,11 @@ namespace Altkom.ABC.CSharpAdv.WPFClient.ViewModels
 
         private readonly IVehiclesService vehiclesService;
 
+        public CustomersViewModel()
+            : this(new Services.VehiclesService())
+        {
+        }
+
         public CustomersViewModel(IVehiclesService vehiclesService)
         {
             this.vehiclesService = vehiclesService;

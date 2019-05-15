@@ -23,6 +23,8 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
             ReflectionTests.Test();
 
             FluentApiTest.Test();
+
+            IocTests.Test();
         }
     }
 }

@@ -22,6 +22,8 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
             entities = entityFaker.Generate(100);
         }
 
+     
+
         public virtual void Add(TEntity entity) => entities.Add(entity);
 
         public virtual IEnumerable<TEntity> Get() => entities;
