@@ -33,6 +33,25 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
         public string Description { get; set; }
         public string Pesel { get; set; }
         public bool IsDeleted { get; set; }
+
+
+        public void Send()
+        {
+            Console.WriteLine("Sent.");
+        }
+
+        public void DoWork(string message, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                Console.WriteLine("Working...!");
+            }
+        }
+
+        public decimal Calculate(decimal unitprice, int qty)
+        {
+            return unitprice * qty;
+        }
     }
     
 

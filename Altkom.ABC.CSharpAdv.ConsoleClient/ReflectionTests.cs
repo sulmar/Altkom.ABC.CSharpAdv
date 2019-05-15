@@ -19,6 +19,8 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
             GetCustomAttributesTest();
 
             SettingTest();
+
+            CallMethodTest();
         }
 
         private static void SettingTest()
@@ -31,6 +33,61 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
 
             Console.WriteLine(setting["Option1"]);
         }
+
+        private static void CallMethodTest()
+        {
+            string classname = "Customer";
+
+            string objectToInstance = $"Altkom.ABC.CSharpAdv.ConsoleClient.{classname}, Altkom.ABC.CSharpAdv.ConsoleClient";
+
+            Type objectType = Type.GetType(objectToInstance);
+
+            if (objectType == null)
+            {
+                throw new NotSupportedException(classname);
+            }
+
+
+            var instance = Activator.CreateInstance(objectType);
+
+            // Call method
+            CallMethod(objectType, instance);
+
+            // Call method with parameters
+            CallMethodWithParameters(objectType, instance);
+
+            // Call function with parameters
+            CallFunctionWithParameters(objectType, instance);
+
+        }
+
+        private static void CallMethod(Type objectType, object instance)
+        {
+            MethodInfo methodInfo = objectType.GetMethod("Send");
+            methodInfo.Invoke(instance, null);
+        }
+
+        private static void CallMethodWithParameters(Type objectType, object instance)
+        {
+            MethodInfo methodInfo2 = objectType.GetMethod("DoWork");
+            var parameters = new object[] { "Hello World!", 10 };
+
+            methodInfo2.Invoke(instance, parameters);
+        }
+
+        private static void CallFunctionWithParameters(Type objectType, object instance)
+        {
+            MethodInfo methodInfo3 = objectType.GetMethod("Calculate");
+            var parameters3 = new object[] { 100m, 5 };
+
+            object result = methodInfo3.Invoke(instance, parameters3);
+
+            Console.WriteLine($"Result {result}");
+        }
+
+        
+
+      
 
         private static void ActivatorTest()
         {
@@ -47,9 +104,14 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
 
             var instance = Activator.CreateInstance(objectType);
 
+
+            // Set value
             objectType.GetProperty("Id").SetValue(instance, 999);
 
+            // Get value
             object value = objectType.GetProperty("Id").GetValue(instance);
+
+
 
 
         }
