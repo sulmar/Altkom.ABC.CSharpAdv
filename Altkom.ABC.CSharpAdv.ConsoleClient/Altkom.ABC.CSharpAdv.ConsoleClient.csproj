@@ -47,6 +47,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="VerbalExpressions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VerbalExpressions-official.0.1.0\lib\net40\VerbalExpressions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollectionTests.cs" />
@@ -57,6 +60,7 @@
     <Compile Include="FakeServices\FakeEntitiesService.cs" />
     <Compile Include="FakeServices\FakeOrdersService.cs" />
     <Compile Include="FakeServices\Fakers\OrderFaker.cs" />
+    <Compile Include="FluentApiTest.cs" />
     <Compile Include="IServices\IEntitiesService.cs" />
     <Compile Include="IServices\IOrdersService.cs" />
     <Compile Include="LinqTest.cs" />

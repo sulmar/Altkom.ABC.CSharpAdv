@@ -21,6 +21,8 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
             LinqTest.Test();
 
             ReflectionTests.Test();
+
+            FluentApiTest.Test();
         }
     }
 }
