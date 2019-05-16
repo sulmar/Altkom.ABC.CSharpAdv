@@ -28,7 +28,11 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
 
             // ThreadTests.Test();
 
-            TasksTest.Test();
+            // TasksTest.Test();
+
+            // LockTests.Test();
+
+            ConcurrentCollectionTests.Test();
 
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();

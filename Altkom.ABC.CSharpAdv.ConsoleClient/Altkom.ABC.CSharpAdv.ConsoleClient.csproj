@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Calculator.cs" />
     <Compile Include="CollectionTests.cs" />
+    <Compile Include="ConcurrentCollectionTests.cs" />
     <Compile Include="DelegateTests.cs" />
     <Compile Include="DynamicTests.cs" />
     <Compile Include="ExtensionMethodTests.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="IServices\IEntitiesService.cs" />
     <Compile Include="IServices\IOrdersService.cs" />
     <Compile Include="LinqTest.cs" />
+    <Compile Include="LockTests.cs" />
     <Compile Include="Models\Base.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="DbServices\DbCustomersService.cs" />
