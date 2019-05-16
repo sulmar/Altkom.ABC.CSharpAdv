@@ -25,6 +25,13 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
             FluentApiTest.Test();
 
             IocTests.Test();
+
+            // ThreadTests.Test();
+
+            TasksTest.Test();
+
+            Console.WriteLine("Press any key to exit.");
+            Console.ReadKey();
         }
     }
 }

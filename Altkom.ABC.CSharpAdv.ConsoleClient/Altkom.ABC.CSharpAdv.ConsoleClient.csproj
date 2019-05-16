@@ -90,6 +90,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionTests.cs" />
+    <Compile Include="TasksTest.cs" />
+    <Compile Include="ThreadTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
