@@ -8,6 +8,17 @@ using System.Threading.Tasks;
 
 namespace Altkom.ABC.CSharpAdv.ConsoleClient
 {
+    class ColorConsoleProgress : IProgress<string>
+    {
+        public void Report(string value)
+        {
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(value);
+            Console.ResetColor();
+        }
+    }
+
     class TasksTest
     {
 
@@ -79,13 +90,18 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
                "http://github.com",
             };
 
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            // CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(8));
 
             CancellationToken token = cancellationTokenSource.Token;
 
-            cancellationTokenSource.CancelAfter(TimeSpan.FromSeconds(8));
+            // cancellationTokenSource.CancelAfter(TimeSpan.FromSeconds(8));
 
-            DownloadAsync(urls, token);
+            // IProgress<string> progress = new Progress<string>(value => Console.WriteLine(value));
+
+            IProgress<string> progress = new ColorConsoleProgress();
+
+            DownloadAsync(urls, token, progress);
            
             //Console.WriteLine("Press any key to cancel");
             //Console.ReadKey();
@@ -93,23 +109,29 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
         }
 
 
-        private static async Task DownloadAsync(string[] urls, CancellationToken token = default(CancellationToken))
+        private static async Task DownloadAsync(string[] urls, 
+            CancellationToken token = default(CancellationToken),
+            IProgress<string> progress = null
+            )
         {
             foreach (string url in urls)
             {
                 if (token.IsCancellationRequested)
                 {
-                    Console.WriteLine("Canceled");
+                    // Console.WriteLine("Canceled");
+                    progress?.Report("Canceled");
                     return;
                 }
 
                 // token.ThrowIfCancellationRequested();
 
-                Console.WriteLine($"Downloading {url}");
+                // Console.WriteLine($"Downloading {url}");
+                progress?.Report($"Downloading {url}");
 
                 await DownloadTaskAsync(url);
 
-                Console.WriteLine($"Downloaded {url}");
+                // Console.WriteLine($"Downloaded {url}");
+                progress?.Report($"Downloaded {url}");
             }            
         }
 
@@ -117,7 +139,7 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
 
         private static async Task AsyncAwaitTestAsync()
         {
-            string content = await DownloadAsync("http://www.altkom.pl");
+            string content = await DownloadAsync("http://www.altkom.pl").ConfigureAwait(false);
             await SendAsync(content);
 
             string content2 = await DownloadAsync("http://www.microsoft.com");
