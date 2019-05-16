@@ -32,7 +32,9 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
 
             // LockTests.Test();
 
-            ConcurrentCollectionTests.Test();
+            // ConcurrentCollectionTests.Test();
+
+            HttpClientTest.Test();
 
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
