@@ -17,25 +17,34 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
 
             // SyncTest();
 
-            TaskTest();
+            //TaskTest();
+
+            //     AsyncAwaitTestAsync();
+
+            CancelTaskTest();
+
+
+          //  Task.Run(()=>CatchTest());
+
+            Console.WriteLine("Do Work...");
 
             // StartTaskTest();
 
-          //  StartNewTaskTest();
+            //  StartNewTaskTest();
         }
 
-        private static void SyncTest()
+        private static async Task CatchTest()
         {
-            string content = Download("http://www.altkom.pl");
-
-            Send(content);
-
-            string content2 = Download("http://www.microsoft.com");
-
-            Send(content2);
-
-            Console.WriteLine("next job");
+            try
+            {
+                await CancelTaskTest();
+            }
+            catch (System.OperationCanceledException e)
+            {
+                Console.WriteLine("Operation canceled.");
+            }
         }
+
 
         private static void TaskTest()
         {
@@ -43,6 +52,76 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
                 .ContinueWith(t => SendAsync(t.Result))
                     .ContinueWith(t => "http://www.microsoft.com")
                         .ContinueWith(t => SendAsync(t.Result));
+
+            Console.WriteLine("next job");
+
+        }
+
+        private static void SyncTest()
+        {
+            string content = Download("http://www.altkom.pl");
+            Send(content);
+
+            string content2 = Download("http://www.microsoft.com");
+            Send(content2);
+
+            Console.WriteLine("next job");
+        }
+
+
+        private static async Task CancelTaskTest()
+        {
+            string[] urls = new string[]
+            {
+               "http://www.altkom.pl",
+               "http://www.microsoft.com",
+               "http://www.google.com",
+               "http://github.com",
+            };
+
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
+            CancellationToken token = cancellationTokenSource.Token;
+
+            cancellationTokenSource.CancelAfter(TimeSpan.FromSeconds(8));
+
+            DownloadAsync(urls, token);
+           
+            //Console.WriteLine("Press any key to cancel");
+            //Console.ReadKey();
+            //cancellationTokenSource.Cancel();
+        }
+
+
+        private static async Task DownloadAsync(string[] urls, CancellationToken token = default(CancellationToken))
+        {
+            foreach (string url in urls)
+            {
+                if (token.IsCancellationRequested)
+                {
+                    Console.WriteLine("Canceled");
+                    return;
+                }
+
+                // token.ThrowIfCancellationRequested();
+
+                Console.WriteLine($"Downloading {url}");
+
+                await DownloadTaskAsync(url);
+
+                Console.WriteLine($"Downloaded {url}");
+            }            
+        }
+
+       
+
+        private static async Task AsyncAwaitTestAsync()
+        {
+            string content = await DownloadAsync("http://www.altkom.pl");
+            await SendAsync(content);
+
+            string content2 = await DownloadAsync("http://www.microsoft.com");
+            await SendAsync(content2);
 
             Console.WriteLine("next job");
 
@@ -102,6 +181,21 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
             return Task.Run(() => Download(url));
         }
 
+        private static async Task<string> DownloadTaskAsync(string url)
+        {
+            using (WebClient client = new WebClient())
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(5));
+
+                string content = await client.DownloadStringTaskAsync(url);
+
+                Console.WriteLine($"#{Thread.CurrentThread.ManagedThreadId} {url} Downloaded {content.Length} ");
+
+                return content;
+            }
+
+        }
+
         private static string Download(string url)
         {
             Console.WriteLine($"#{Thread.CurrentThread.ManagedThreadId} {url} Downloading...");
@@ -111,6 +205,8 @@ namespace Altkom.ABC.CSharpAdv.ConsoleClient
                 Thread.Sleep(TimeSpan.FromSeconds(5));
 
                 string content = client.DownloadString(url);
+
+                
 
                 Console.WriteLine($"#{Thread.CurrentThread.ManagedThreadId} {url} Downloaded {content.Length} ");
 
