@@ -125,3 +125,8 @@ DateTime.Now + 5.Years();
 ~~~
 
 https://github.com/FluentDateTime/FluentDateTime
+
+
+## Links
+- wersje .NET i C#
+https://stackoverflow.com/questions/247621/what-are-the-correct-version-numbers-for-c
